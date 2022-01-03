@@ -19,7 +19,8 @@ class Ui:
             )
         self.resultBox.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
         self.resultBox.setFont(QtGui.QFont("궁서",30))
-
+        self.resultBox.setText("0")
+        
         self.operatorBtn = []
         self.operatorList = ["=","+","-","×","÷","Del"]
         for index in range(0,len(self.operatorList)):

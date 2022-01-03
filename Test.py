@@ -4,10 +4,7 @@ import Ui
 import random
 
 # "종류가 다르면 분리한다. 이벤트 내용이 다르면"
-# 이벤트의 결과가 같으면 같으 함수로 처리한다 
-
-
-
+# 이벤트의 결과가 같으면 같은 함수로 처리한다 
 class Main:
     def __init__(self):
         self.ui = Ui.Ui()
@@ -15,7 +12,9 @@ class Main:
         self.inputNumber = ""
         self.firstNum = []
         self.secondNum = []
-
+        self.operator = None
+        self.result = 0
+        
     def connectEvent(self):
         for index in range(0,len(self.ui.numberBtn)):
             self.ui.numberBtn[index].mousePressEvent = lambda event, num = index: self.numberEvent(event, num)
@@ -73,6 +72,11 @@ class Main:
                 "background-color : lightgrey;"
                 )
 
+    def clearList(self):
+        self.firstNum.clear()
+        self.secondNum.clear()
+        self.firstNum.append(self.result)
+
     def numberEvent(self,event,index):
         initNumber = []
         initNumber.append(index+1)
@@ -83,51 +87,50 @@ class Main:
             self.firstNum.append(self.inputNumber)        
         else:
             self.secondNum.append(self.inputNumber)
+            self.calculate(self.operator)
 
     def plus(self):
         self.inputNumber = ""
-        self.ui.resultBox.clear()
-        operator = "+"
-        if len(self.firstNum) == 1 and len(self.secondNum) == 1:
-            self.calculate(operator)
+        self.operator = "+"
 
     def minus(self):
         self.inputNumber = ""
-        self.ui.resultBox.clear()
-        operator = "-"
-        if len(self.firstNum) == 1 and len(self.secondNum) == 1:
-            self.calculate(operator)
-    def multiply(self):
-        pass
-    def division(self):
-        pass
-    def calculate(self,operator):
-        print(self.firstNum)
-        print(self.secondNum)
+        self.operator = "-"
 
+    def multiply(self):
+        self.inputNumber = ""
+        self.operator = "×"
+    def division(self):
+        self.inputNumber = ""
+        self.operator = "÷"
+
+    def calculate(self,operator):
         if operator == "+":
-            result = int(self.firstNum[0])+int(self.secondNum[0])
-            print(result)
-            self.firstNum.clear()
-            self.secondNum.clear()
-            self.firstNum.append(result)
-            print(self.firstNum)
+            self.result = int(self.firstNum[0])+int(self.secondNum[0])
+            self.clearList()
+
         elif operator == "-":
-            result = int(self.firstNum[0])-int(self.secondNum[0])
-            print(result)
-            self.firstNum.clear()
-            self.secondNum.clear()
-            self.firstNum.append(result)
-            print(self.firstNum)
+            self.result = int(self.firstNum[0])-int(self.secondNum[0])
+            self.clearList()
+
+        elif operator == "×":
+            self.result = int(self.firstNum[0])*int(self.secondNum[0])
+            self.clearList()
+
+        elif operator == "÷":
+            self.result = int(self.firstNum[0])/int(self.secondNum[0])
+            self.clearList()
+
         else:
             pass
+
     def delete(self):
         pass
     def showResult(self):
-        pass
+        self.ui.resultBox.clear()
+        self.ui.resultBox.setText(str(self.firstNum[0]))
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     main = Main()
-
     sys.exit(app.exec_())
