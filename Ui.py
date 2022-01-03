@@ -63,8 +63,4 @@ class Ui:
                 )
             tmpBtn.setText(self.toolList[index])
             self.toolBtn.append(tmpBtn)
-
-
-
-
         self.mainWindow.show()
