@@ -21,6 +21,21 @@ class Ui:
         self.resultBox.setFont(QtGui.QFont("궁서",30))
         self.resultBox.setText("0")
         
+        self.calculateBox = []
+        for index in range(0,2):
+            tmpSpace = QtWidgets.QLabel(self.resultBox)
+            xPos = 0 + 370*index
+            xLen = 370 - 310*index
+            tmpSpace.setGeometry(xPos,0,xLen,35)
+            tmpSpace.setFont(QtGui.QFont("궁서",20))
+            tmpSpace.setStyleSheet("border : None  ;")
+            if index == 0:
+                tmpSpace.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
+            else:
+                tmpSpace.setAlignment(QtCore.Qt.AlignCenter)
+            self.calculateBox.append(tmpSpace)
+
+
         self.operatorBtn = []
         self.operatorList = ["=","+","-","×","÷","Del"]
         for index in range(0,len(self.operatorList)):
@@ -65,3 +80,5 @@ class Ui:
             tmpBtn.setText(self.toolList[index])
             self.toolBtn.append(tmpBtn)
         self.mainWindow.show()
+
+
