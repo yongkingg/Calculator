@@ -50,7 +50,7 @@ class Ui:
             self.operatorBtn.append(tmpBtn)
         
         self.numberBtn = []
-        self.additionList = ["+/-","0","."]
+        self.additionList = ["","0",""]
         for index in range(0,12):
             tmpBtn = QtWidgets.QPushButton(self.centralWidget)
             xPos = 40 + 110*(index%3)
@@ -64,6 +64,9 @@ class Ui:
                 tmpBtn.setText(str(index + 1))
             else:
                 tmpBtn.setText(self.additionList[index-9])
+
+            if index == 11 or index == 9:
+                tmpBtn.setEnabled(True)
             self.numberBtn.append(tmpBtn)
             
         self.toolBtn = []

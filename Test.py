@@ -15,7 +15,7 @@ class Main:
         self.initNumber = []
         self.operator = None
         self.result = 0
-        
+
     def connectEvent(self):
         for index in range(0,len(self.ui.numberBtn)):
             self.ui.numberBtn[index].mousePressEvent = lambda event, num = index: self.numberEvent(event, num)
@@ -99,61 +99,48 @@ class Main:
         self.ui.calculateBox[1].setText(str(operator)) 
         if len(self.firstNum) == 0:
             self.firstNum.append(self.inputNumber)            
-            if operator == "1/x":
-                self.calculate(self.operator)
-            elif operator == "x^2":
-                self.calculate(self.operator)
-            elif operator == "√":
-                self.calculate(self.operator)
         else:
-            if operator == "1/x":
-                self.calculate(self.operator)
-            elif operator == "x^2":
-                self.calculate(self.operator)
-            elif operator == "√":
-                self.calculate(self.operator)
+            pass
+        if operator == "1/x":
+            self.calculate(self.operator)
+        elif operator == "x^2":
+            self.calculate(self.operator)
+        elif operator == "√":
+            self.calculate(self.operator)
+        self.inputNumber = ""
     
     def plus(self):
         self.operator = "+"
         self.saveNum(self.operator)
-        self.inputNumber = ""
 
     def minus(self):
         self.operator = "-"
         self.saveNum(self.operator)
-        self.inputNumber = ""
 
     def multiply(self):
         self.operator = "×"
         self.saveNum(self.operator)
-        self.inputNumber = ""
 
     def division(self):
         self.operator = "÷"
         self.saveNum(self.operator)
-        self.inputNumber = ""
 
     def remainder(self):
         self.operator = "%"
         self.saveNum(self.operator)
-        self.inputNumber = ""
 
     def fraction(self):
         self.operator = "1/x"
         self.saveNum(self.operator)
-        self.inputNumber = ""
 
     def square(self):
         self.operator = "x^2"
         self.saveNum(self.operator)
-        self.initNumber = ""
 
     def root(self):
         self.operator = "√"
         self.saveNum(self.operator)
-        self.initNumber = ""
-        
-        
+                
     def calculate(self,operator):
         if operator == "+":
             self.result = int(self.firstNum[0]) + int(self.secondNum[0])
@@ -190,12 +177,13 @@ class Main:
             self.firstNum.clear()
             self.firstNum.append(self.result)
 
-
     def delete(self):
         self.inputNumber = list(self.inputNumber)
         numLength = len(self.inputNumber)-1
         self.inputNumber = self.inputNumber[:numLength]
-        
+        self.inputNumber = "".join(self.inputNumber)
+        self.ui.resultBox.setText(str("".join(self.inputNumber)))
+        self.ui.calculateBox[0].setText((str("".join(self.inputNumber))))
         
     def clear(self):
         self.firstNum.clear()
